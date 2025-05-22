@@ -181,30 +181,41 @@ def dashboard():
     response = users_table.get_item(Key={'email': user_email})
     user = response.get('Item', {})
     
-    # Get user's design requests
-    response = design_requests_table.query(
-        KeyConditionExpression=Key('email').eq(user_email)
-    )
-    design_requests = response.get('Items', [])
+    # Get user's design requests - FIXED
+    try:
+        response = design_requests_table.scan(
+            FilterExpression=Attr('email').eq(user_email)
+        )
+        design_requests = response.get('Items', [])
+    except Exception as e:
+        print(f"Error fetching design requests: {e}")
+        design_requests = []
     
-    # Get user's orders
-    response = orders_table.query(
-        KeyConditionExpression=Key('customer_email').eq(user_email)
-    )
-    orders = response.get('Items', [])
+    # Get user's orders - FIXED
+    try:
+        response = orders_table.scan(
+            FilterExpression=Attr('customer_email').eq(user_email)
+        )
+        orders = response.get('Items', [])
+    except Exception as e:
+        print(f"Error fetching orders: {e}")
+        orders = []
     
-    # Get user's consultations
-    response = consultation_table.query(
-        KeyConditionExpression=Key('customer_email').eq(user_email)
-    )
-    consultations = response.get('Items', [])
+    # Get user's consultations - FIXED
+    try:
+        response = consultation_table.scan(
+            FilterExpression=Attr('customer_email').eq(user_email)
+        )
+        consultations = response.get('Items', [])
+    except Exception as e:
+        print(f"Error fetching consultations: {e}")
+        consultations = []
     
     return render_template('dashboard.html', 
                            user=user, 
                            design_requests=design_requests,
                            orders=orders,
                            consultations=consultations)
-
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
