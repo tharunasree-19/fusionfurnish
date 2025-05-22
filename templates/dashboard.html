@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - FusionFurnish{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-card {
+        transition: all 0.3s ease;
+    }
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Dashboard Header -->
+    <div class="bg-white shadow-sm rounded-lg p-6 mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ user.name }}!</h1>
+                <p class="text-gray-600 mt-1">Manage your account, orders, and design requests.</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a href="{{ url_for('profile') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-user-edit mr-2"></i> Edit Profile
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Orders Stat -->
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-sm p-6 dashboard-card">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-lg font-semibold">Total Orders</p>
+                    <h2 class="text-3xl font-bold mt-2">{{ orders|length }}</h2>
+                </div>
+                <div class="rounded-full bg-white bg-opacity-20 p-3">
+                    <i class="fas fa-shopping-bag text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a href="{{ url_for('user_orders') }}" class="text-sm text-white hover:text-blue-100">View all orders <i

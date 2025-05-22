@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Testimonials - FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-2 text-center">Customer Testimonials</h1>
+    <p class="text-gray-600 text-center mb-8">What our customers say about us</p>
+    
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {% for testimonial in testimonials %}
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold text-xl mr-4">
+                    {{ testimonial.name[0] }}
+                </div>
+                <div>
+                    <h3 class="font-semibold">{{ testimonial.name }}</h3>
+                    <div class="flex text-amber-500">
+                        {% for i in range(testimonial.rating) %}
+                        <i class="fas fa-star"></i>
+                        {% endfor %}
+                        {% for i in range(5 - testimonial.rating) %}
+                        <i class="far fa-star"></i>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600">{{ testimonial.message }}</p>
+        </div>
+        {% endfor %}
+        
+        <!-- Additional testimonials -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold text-xl mr-4">
+                    S
+                </div>
+                <div>
+                    <h3 class="font-semibold">Sanjay Mehta</h3>
+                    <div class="flex text-amber-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600">The quality of FusionFurnish products is outstanding. I ordered a complete living room set, and I'm incredibly pleased with the craftsmanship and attention to detail.</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold text-xl mr-4">
+                    R
+                </div>
+                <div>
+                    <h3 class="font-semibold">Ritu Desai</h3>
+                    <div class="flex text-amber-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600">I had specific requirements for my home office desk, and the design consultation service helped me get exactly what I needed. The finished product is perfect for my space!</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold text-xl mr-4">
+                    K
+                </div>
+                <div>
+                    <h3 class="font-semibold">Kiran Nair</h3>
+                    <div class="flex text-amber-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600">The delivery was prompt and the installation team was professional. They set up my bedroom furniture quickly and cleaned up everything before leaving. Very impressed!</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold text-xl mr-4">
+                    V
+                </div>
+                <div>
+                    <h3 class="font-semibold">Vikram Singh</h3>
+                    <div class="flex text-amber-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600">I've purchased from many furniture retailers over the years, but FusionFurnish stands out for their customer service. They were responsive to all my questions and requests.</p>
+        </div>
+    </div>
+    
+    <div class="mt-12 max-w-2xl mx-auto bg-amber-50 rounded-lg p-6 text-center">
+        <h2 class="text-2xl font-bold mb-4">Share Your Experience</h2>
+        <p class="text-gray-600 mb-6">We'd love to hear about your experience with FusionFurnish. Your feedback helps us improve our products and services.</p>
+        <a href="#" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+            Write a Review
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - FusionFurnish Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+        }
+        .sidebar a {
+            color: #f8f9fa;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .sidebar .active {
+            background-color: #0d6efd;
+        }
+        .content {
+            padding: 20px;
+        }
+        .admin-header {
+            background-color: #212529;
+            color: white;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 p-0 sidebar">
+                <div class="text-center p-3">
+                    <h4 class="text-white">FusionFurnish</h4>
+                    <p class="text-white-50">Admin Panel</p>
+                </div>
+                <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                <a href="{{ url_for('admin_users') }}"><i class="fas fa-users me-2"></i> Users</a>
+                <a href="{{ url_for('admin_orders') }}"><i class="fas fa-shopping-cart me-2"></i> Orders</a>
+                <a href="{{ url_for('admin_consultations') }}"><i class="fas fa-calendar-check me-2"></i> Consultations</a>
+                <a href="{{ url_for('admin_design_requests') }}"><i class="fas fa-drafting-compass me-2"></i> Design Requests</a>
+                <a href="{{ url_for('admin_products') }}" class="active"><i class="fas fa-couch me-2"></i> Products</a>
+                <a href="{{ url_for('admin_contact_messages') }}"><i class="fas fa-envelope me-2"></i> Contact Messages</a>
+                <a href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-10 content">
+                <div class="admin-header mb-4">
+                    <div class="d-flex justify-content-between">
+                        <h2><i class="fas fa-edit"></i> Edit Product</h2>
+                        <div>
+                            <span class="me-3">Welcome, {{ session.get('admin_name') }}</span>
+                            <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-light btn-sm">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Edit Product Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ url_for('edit_product', product_id=product.product_id) }}" method="POST">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select class="form-select" id="category" name="category" required>
+                                        <option value="Living Room" {% if product.category == 'Living Room' %}selected{% endif %}>Living Room</option>
+                                        <option value="Bedroom" {% if product.category == 'Bedroom' %}selected{% endif %}>Bedroom</option>
+                                        <option value="Dining" {% if product.category == 'Dining' %}selected{% endif %}>Dining</option>
+                                        <option value="Office" {% if product.category == 'Office' %}selected{% endif %}>Office</option>
+                                        <option value="Outdoor" {% if product.category == 'Outdoor' %}selected{% endif %}>Outdoor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="price" class="form-label">Price (₹)</label>
+                                    <input type="number" class="form-control" id="price" name="price" value="{{ product.price|int }}" min="0" step="0.01" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="stock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="stock" name="stock" value="{{ product.stock }}" min="0" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="4" required>{{ product.description }}</textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Image URL</label>
+                                <input type="text" class="form-control" id="image" name="image" value="{{ product.image }}">
+                                <small class="text-muted">Enter the URL of the product image</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                {% if product.image %}
+                                <div class="card" style="max-width: 18rem;">
+                                    <div class="card-header">Current Image</div>
+                                    <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                                </div>
+                                {% else %}
+                                <div class="alert alert-info">No image currently set for this product.</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ url_for('admin_products') }}" class="btn btn-secondary">Cancel</a>
+                                <div>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        Delete Product
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this product: <strong>{{ product.name }}</strong>?
+                    <p class="text-danger mt-2">This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form action="{{ url_for('delete_product', product_id=product.product_id) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

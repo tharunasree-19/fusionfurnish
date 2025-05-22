@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Book a Design Consultation | FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="mb-4">Book a Design Consultation</h1>
+            
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number*</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="preferred_date" class="form-label">Preferred Date*</label>
+                            <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="preferred_time" class="form-label">Preferred Time*</label>
+                            <select class="form-select" id="preferred_time" name="preferred_time" required>
+                                <option value="" selected disabled>Select time slot</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="consultation_type" class="form-label">Consultation Type*</label>
+                            <select class="form-select" id="consultation_type" name="consultation_type" required>
+                                <option value="" selected disabled>Select consultation type</option>
+                                <option value="In-home">In-home Consultation (₹1,500)</option>
+                                <option value="Virtual">Virtual Consultation (₹999)</option>
+                                <option value="In-store">In-store Consultation (Free)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="room_type" class="form-label">Room Type*</label>
+                            <select class="form-select" id="room_type" name="room_type" required>
+                                <option value="" selected disabled>Select room type</option>
+                                <option value="Living Room">Living Room</option>
+                                <option value="Bedroom">Bedroom</option>
+                                <option value="Kitchen">Kitchen</option>
+                                <option value="Dining Room">Dining Room</option>
+                                <option value="Office">Home Office</option>
+                                <option value="Multiple Rooms">Multiple Rooms</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="special_requirements" class="form-label">Special Requirements or Notes</label>
+                            <textarea class="form-control" id="special_requirements" name="special_requirements" rows="4" placeholder="Tell us about your specific needs, style preferences, budget constraints, etc."></textarea>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <h5>What happens next?</h5>
+                            <p>After submitting your request, our team will review it and confirm your appointment. A design consultant will contact you prior to your scheduled appointment.</p>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Book Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

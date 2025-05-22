@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Custom Furniture Request - FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8 px-4">
+    <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <div class="p-6 bg-indigo-600 text-white">
+            <h1 class="text-2xl font-semibold">Custom Furniture Request</h1>
+            <p class="mt-2">Tell us about your dream furniture and we'll bring it to life.</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('custom_request') }}" class="p-6">
+            <div class="space-y-6">
+                <div>
+                    <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" required placeholder="Your contact number"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                
+                <div>
+                    <label for="furniture_type" class="block text-gray-700 font-medium mb-2">Furniture Type</label>
+                    <select name="furniture_type" id="furniture_type" required
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="">Select Furniture Type</option>
+                        <option value="Sofa">Sofa / Couch</option>
+                        <option value="Dining Table">Dining Table</option>
+                        <option value="Bed">Bed</option>
+                        <option value="Wardrobe">Wardrobe</option>
+                        <option value="Bookshelf">Bookshelf</option>
+                        <option value="Office Desk">Office Desk</option>
+                        <option value="Entertainment Unit">Entertainment Unit</option>
+                        <option value="Coffee Table">Coffee Table</option>
+                        <option value="Other">Other (Specify in Description)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="description" class="block text-gray-700 font-medium mb-2">Design Description</label>
+                    <textarea name="description" id="description" rows="6" required placeholder="Please describe your custom furniture requirements in detail (dimensions, materials, style, features, etc.)"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                </div>
+                
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-gray-800 mb-2">Helpful Tips:</h3>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc list-inside">
+                        <li>Include specific measurements if you have them</li>
+                        <li>Mention your preferred materials and finish</li>
+                        <li>Describe the style (modern, traditional, minimalist, etc.)</li>
+                        <li>Share links or references to similar designs you like</li>
+                        <li>Mention any special features you need (storage, extendable, etc.)</li>
+                    </ul>
+                </div>
+                
+                <div class="text-right">
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                        Submit Request
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="max-w-2xl mx-auto mt-8">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-pencil-alt text-lg"></i>
+                    </div>
+                </div>
+                <h3 class="font-medium text-gray-800 mb-2">1. Submit Request</h3>
+                <p class="text-sm text-gray-600">Fill out the form with your custom furniture requirements.</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-comments text-lg"></i>
+                    </div>
+                </div>
+                <h3 class="font-medium text-gray-800 mb-2">2. Design Consultation</h3>
+                <p class="text-sm text-gray-600">Our design team will contact you to discuss details and provide a quote.</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-couch text-lg"></i>
+                    </div>
+                </div>
+                <h3 class="font-medium text-gray-800 mb-2">3. Crafting & Delivery</h3>
+                <p class="text-sm text-gray-600">We craft your custom piece and deliver it to your doorstep.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

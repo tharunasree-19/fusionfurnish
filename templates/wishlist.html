@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}My Wishlist | FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">My Wishlist</h1>
+            
+            {% if wishlist_items %}
+                <div class="row">
+                    {% for item in wishlist_items %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.name }}</h5>
+                                    <p class="card-text text-primary">₹{{ item.price }}</p>
+                                    <p class="card-text">{{ item.category }}</p>
+                                </div>
+                                <div class="card-footer bg-white d-flex justify-content-between">
+                                    <a href="{{ url_for('product_detail', product_id=item.product_id) }}" class="btn btn-outline-primary">View Details</a>
+                                    <form method="post" action="{{ url_for('remove_from_wishlist', product_id=item.product_id) }}">
+                                        <button type="submit" class="btn btn-outline-danger">Remove</button>
+                                    </form>
+                                    <form method="post" action="{{ url_for('quick_order', product_id=item.product_id) }}">
+                                        <button type="submit" class="btn btn-primary">Order Now</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>Your wishlist is empty. Browse our <a href="{{ url_for('furniture_catalog') }}">catalog</a> to add items to your wishlist.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

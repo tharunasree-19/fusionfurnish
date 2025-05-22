@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionFurnish Admin - Orders Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+        }
+        .sidebar a {
+            color: #fff;
+            padding: 10px 15px;
+            display: block;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .sidebar a.active {
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar p-0">
+                <div class="text-center py-4">
+                    <h4 class="text-white">FusionFurnish</h4>
+                    <p class="text-white-50">Admin Panel</p>
+                </div>
+                <a href="{{ url_for('admin_dashboard') }}">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </a>
+                <a href="{{ url_for('admin_users') }}">
+                    <i class="fas fa-users me-2"></i> Users
+                </a>
+                <a href="{{ url_for('admin_orders') }}" class="active">
+                    <i class="fas fa-shopping-cart me-2"></i> Orders
+                </a>
+                <a href="{{ url_for('admin_products') }}">
+                    <i class="fas fa-couch me-2"></i> Products
+                </a>
+                <a href="{{ url_for('admin_design_requests') }}">
+                    <i class="fas fa-drafting-compass me-2"></i> Design Requests
+                </a>
+                <a href="{{ url_for('admin_consultations') }}">
+                    <i class="fas fa-calendar-check me-2"></i> Consultations
+                </a>
+                <a href="{{ url_for('admin_contact_messages') }}">
+                    <i class="fas fa-envelope me-2"></i> Contact Messages
+                </a>
+                <a href="{{ url_for('admin_logout') }}" class="mt-5">
+                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-10 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Orders Management</h2>
+                    <div>
+                        <span class="me-2">Welcome, {{ session.get('admin_name') }}</span>
+                        <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Search & Filter -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="row g-3" method="GET">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="search" placeholder="Search by order ID or customer" value="{{ request.args.get('search', '') }}">
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select" name="status">
+                                    <option value="">All Statuses</option>
+                                    <option value="Placed" {% if request.args.get('status') == 'Placed' %}selected{% endif %}>Placed</option>
+                                    <option value="Processing" {% if request.args.get('status') == 'Processing' %}selected{% endif %}>Processing</option>
+                                    <option value="Shipped" {% if request.args.get('status') == 'Shipped' %}selected{% endif %}>Shipped</option>
+                                    <option value="Delivered" {% if request.args.get('status') == 'Delivered' %}selected{% endif %}>Delivered</option>
+                                    <option value="Cancelled" {% if request.args.get('status') == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select" name="payment_status">
+                                    <option value="">All Payments</option>
+                                    <option value="Pending" {% if request.args.get('payment_status') == 'Pending' %}selected{% endif %}>Pending</option>
+                                    <option value="Paid" {% if request.args.get('payment_status') == 'Paid' %}selected{% endif %}>Paid</option>
+                                    <option value="Failed" {% if request.args.get('payment_status') == 'Failed' %}selected{% endif %}>Failed</option>
+                                    <option value="Refunded" {% if request.args.get('payment_status') == 'Refunded' %}selected{% endif %}>Refunded</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search me-1"></i> Search
+                                </button>
+                                <a href="{{ url_for('admin_orders') }}" class="btn btn-secondary">
+                                    <i class="fas fa-redo me-1"></i> Reset
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Orders Table -->
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">All Orders</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Total Amount</th>
+                                        <th>Status</th>
+                                        <th>Payment</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>{{ order.order_id[:8] }}...</td>
+                                        <td>{{ order.customer_name }}<br><small>{{ order.customer_email }}</small></td>
+                                        <td>{{ order.created_at.split('T')[0] if order.created_at else 'N/A' }}</td>
+                                        <td>{{ order.items|length }} item(s)</td>
+                                        <td>₹{{ order.total_amount }}</td>
+                                        <td>
+                                            {% if order.status == 'Placed' %}
+                                            <span class="badge bg-primary">{{ order.status }}</span>
+                                            {% elif order.status == 'Processing' %}
+                                            <span class="badge bg-info">{{ order.status }}</span>
+                                            {% elif order.status == 'Shipped' %}
+                                            <span class="badge bg-warning">{{ order.status }}</span>
+                                            {% elif order.status == 'Delivered' %}
+                                            <span class="badge bg-success">{{ order.status }}</span>
+                                            {% elif order.status == 'Cancelled' %}
+                                            <span class="badge bg-danger">{{ order.status }}</span>
+                                            {% else %}
+                                            <span class="badge bg-secondary">{{ order.status }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if order.payment_status == 'Pending' %}
+                                            <span class="badge bg-warning">{{ order.payment_status }}</span>
+                                            {% elif order.payment_status == 'Paid' %}
+                                            <span class="badge bg-success">{{ order.payment_status

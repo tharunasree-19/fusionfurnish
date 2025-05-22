@@ -1,0 +1,1263 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us | FusionFurnish{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Parallax Effect -->
+<section class="hero-section position-relative overflow-hidden">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container position-relative z-3">
+        <div class="row min-vh-100 align-items-center">
+            <div class="col-lg-8 mx-auto text-center text-white">
+                <div class="hero-content" data-aos="fade-up">
+                    <h1 class="hero-title mb-4">Crafting Dreams Into Reality</h1>
+                    <p class="hero-subtitle mb-5">Where exceptional design meets unparalleled craftsmanship</p>
+                    <div class="hero-buttons">
+                        <a href="{{ url_for('design_consultation') }}" class="btn btn-premium me-3">Start Your Journey</a>
+                        <a href="#story" class="btn btn-outline-light">Discover Our Story</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Story Section -->
+<section id="story" class="story-section py-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="story-image-wrapper">
+                    <img src="{{ url_for('static', filename='images/about-us.jpg') }}" alt="Our Story" class="story-image">
+                    <div class="story-badge">
+                        <span class="badge-year">2018</span>
+                        <span class="badge-text">Founded</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="story-content">
+                    <h2 class="section-title">Our Journey</h2>
+                    <div class="title-accent"></div>
+                    <p class="story-text">From a passionate craftsman's vision to India's premier custom furniture brand - our story is one of dedication, innovation, and unwavering commitment to excellence.</p>
+                    
+                    <div class="story-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>Heritage Craftsmanship</h4>
+                                <p>Three generations of woodworking expertise</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h4>1000+ Happy Families</h4>
+                                <p>Transforming homes across India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-wrapper">
+            <div class="row g-0">
+                <div class="col-lg-3 col-6">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="stat-number" data-count="1200">0</div>
+                        <div class="stat-label">Custom Pieces</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">Cities Served</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">% Satisfaction</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="stat-number" data-count="6">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center" data-aos="fade-up">
+                <h2 class="section-title mb-4">Our Mission</h2>
+                <div class="title-accent mx-auto mb-5"></div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <blockquote class="mission-quote">
+                        "To revolutionize the furniture industry by creating bespoke pieces that reflect individual stories, combining traditional Indian craftsmanship with contemporary design excellence."
+                    </blockquote>
+                    <div class="mission-values">
+                        <div class="value-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>Sustainability</span>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Passion</span>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-star"></i>
+                            <span>Excellence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">What Makes Us Different</h2>
+            <div class="title-accent mx-auto"></div>
+            <p class="section-subtitle">Experience the FusionFurnish advantage</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="service-title">Bespoke Design</h3>
+                    <p class="service-description">Every piece is uniquely crafted to reflect your personality and space requirements.</p>
+                    <div class="service-features">
+                        <span class="feature-tag">3D Visualization</span>
+                        <span class="feature-tag">Custom Sizing</span>
+                        <span class="feature-tag">Material Choice</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3 class="service-title">Master Craftsmanship</h3>
+                    <p class="service-description">Skilled artisans with decades of experience bring your vision to life with precision.</p>
+                    <div class="service-features">
+                        <span class="feature-tag">Hand-crafted</span>
+                        <span class="feature-tag">Quality Wood</span>
+                        <span class="feature-tag">Lifetime Support</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="service-title">Eco-Conscious</h3>
+                    <p class="service-description">Sustainably sourced materials and eco-friendly processes for a better tomorrow.</p>
+                    <div class="service-features">
+                        <span class="feature-tag">Sustainable Wood</span>
+                        <span class="feature-tag">Non-toxic Finish</span>
+                        <span class="feature-tag">Green Process</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="process-section py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Our Creative Process</h2>
+            <div class="title-accent mx-auto"></div>
+            <p class="section-subtitle">From inspiration to installation</p>
+        </div>
+        
+        <div class="process-timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <div class="step-number">01</div>
+                    <h3>Consultation</h3>
+                    <p>Understanding your vision, space, and lifestyle needs through detailed discussion.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="{{ url_for('static', filename='images/process-1.jpg') }}" alt="Consultation">
+                </div>
+            </div>
+            
+            <div class="timeline-item reverse" data-aos="fade-left">
+                <div class="timeline-content">
+                    <div class="step-number">02</div>
+                    <h3>Design & Visualization</h3>
+                    <p>Creating detailed designs and 3D renders to bring your ideas to life.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="{{ url_for('static', filename='images/process-2.jpg') }}" alt="Design">
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <div class="step-number">03</div>
+                    <h3>Crafting Excellence</h3>
+                    <p>Master craftsmen meticulously create your furniture with attention to every detail.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="{{ url_for('static', filename='images/workshop.jpg') }}" alt="Crafting">
+                </div>
+            </div>
+            
+            <div class="timeline-item reverse" data-aos="fade-left">
+                <div class="timeline-content">
+                    <div class="step-number">04</div>
+                    <h3>Perfect Installation</h3>
+                    <p>Professional delivery and installation to ensure your furniture fits perfectly.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="{{ url_for('static', filename='images/process-4.jpg') }}" alt="Installation">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Meet Our Artisans</h2>
+            <div class="title-accent mx-auto"></div>
+            <p class="section-subtitle">The creative minds behind every masterpiece</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='images/team-1.jpg') }}" alt="Rajiv Mehta">
+                        <div class="member-overlay">
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Rajiv Mehta</h4>
+                        <span class="member-role">Founder & Visionary</span>
+                        <p class="member-bio">Third-generation craftsman with a passion for innovation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='images/team-2.jpg') }}" alt="Priya Sharma">
+                        <div class="member-overlay">
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Priya Sharma</h4>
+                        <span class="member-role">Creative Director</span>
+                        <p class="member-bio">Award-winning designer specializing in contemporary aesthetics</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='images/team-3.jpg') }}" alt="Vikram Singh">
+                        <div class="member-overlay">
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Vikram Singh</h4>
+                        <span class="member-role">Master Craftsman</span>
+                        <p class="member-bio">Expert in traditional woodworking techniques and modern tools</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="{{ url_for('static', filename='images/team-4.jpg') }}" alt="Anjali Patel">
+                        <div class="member-overlay">
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Anjali Patel</h4>
+                        <span class="member-role">Client Relations</span>
+                        <p class="member-bio">Ensuring every client experience exceeds expectations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title text-white">Client Stories</h2>
+            <div class="title-accent mx-auto bg-white"></div>
+            <p class="section-subtitle text-white opacity-75">What our clients say about their FusionFurnish experience</p>
+        </div>
+        
+        <div class="testimonials-slider" data-aos="fade-up">
+            <div class="testimonial-card active">
+                <div class="testimonial-content">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"FusionFurnish didn't just create furniture for us; they crafted an experience. Every piece tells a story and perfectly captures our family's essence."</p>
+                    <div class="testimonial-author">
+                        <img src="{{ url_for('static', filename='images/client-1.jpg') }}" alt="Client">
+                        <div class="author-info">
+                            <h5>Arjun & Meera Kapoor</h5>
+                            <span>Mumbai</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5">
+    <div class="container">
+        <div class="cta-wrapper text-center" data-aos="zoom-in">
+            <h2 class="cta-title">Ready to Create Your Masterpiece?</h2>
+            <p class="cta-subtitle">Let's transform your space with furniture that's uniquely yours</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('design_consultation') }}" class="btn btn-premium me-3">
+                    <i class="fas fa-calendar-alt me-2"></i>Book Free Consultation
+                </a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-phone me-2"></i>Call +91 98765 43210
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom Styles -->
+<style>
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
+    --accent-color: #f39c12;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --bg-light: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, #fff, #ecf0f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.btn-premium {
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    color: white;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll-arrow {
+    width: 2px;
+    height: 30px;
+    background: white;
+    position: relative;
+    animation: scrollBounce 2s infinite;
+}
+
+.scroll-arrow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -3px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg);
+}
+
+/* Story Section */
+.story-section {
+    padding: 100px 0;
+}
+
+.story-image-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.story-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.story-image-wrapper:hover .story-image {
+    transform: scale(1.05);
+}
+
+.story-badge {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.badge-year {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.badge-text {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.title-accent {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    margin-bottom: 2rem;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.highlight-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.highlight-content h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.highlight-content p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Stats Section */
+.stats-section {
+    background: linear-gradient(135deg, var(--primary-color), #34495e);
+    padding: 80px 0;
+}
+
+.stats-wrapper {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+}
+
+.stat-item {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #fff, #ecf0f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Mission Section */
+.mission-section {
+    background: var(--bg-light);
+    padding: 100px 0;
+}
+
+.mission-card {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.mission-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.mission-quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.mission-values {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.value-item i {
+    color: var(--secondary-color);
+}
+
+/* Services Section */
+.services-section {
+    padding: 100px 0;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-top: 1rem;
+}
+
+.service-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.service-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.service-description {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.service-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.feature-tag {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Process Section */
+.process-section {
+    background: var(--bg-light);
+    padding: 100px 0;
+}
+
+.process-timeline {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    gap: 3rem;
+}
+
+.timeline-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.step-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
+.timeline-content h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.timeline-content p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.timeline-image {
+    flex: 1;
+}
+
+.timeline-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Team Section */
+.team-section {
+    padding: 100px 0;
+}
+
+.team-member {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.member-image {
+    position: relative;
+    margin-bottom: 1.5rem;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.member-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(231, 76, 60, 0.9), rgba(243, 156, 18, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.member-image:hover .member-overlay {
+    opacity: 1;
+}
+
+.member-image:hover img {
+    transform: scale(1.1);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+}
+
+.member-info h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.member-role {
+    color: var(--secondary-color);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.member-bio {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background: linear-gradient(135deg, var(--primary-color), #34495e);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stars {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.stars i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin: 0 2px;
+}
+
+.testimonial-text {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.author-info h5 {
+    color: white;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.author-info span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 100px 0;
+    background: var(--bg-light);
+}
+
+.cta-wrapper {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.cta-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Animations */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes scrollBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Counter Animation */
+.stat-number[data-count] {
+    animation: countUp 2s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .timeline-item {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    
+    .timeline-item.reverse {
+        flex-direction: column !important;
+    }
+    
+    .step-number {
+        font-size: 3rem;
+    }
+    
+    .cta-title {
+        font-size: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .story-section,
+    .services-section,
+    .process-section,
+    .team-section,
+    .testimonials-section,
+    .cta-section {
+        padding: 60px 0;
+    }
+    
+    .mission-section {
+        padding: 60px 0;
+    }
+    
+    .mission-card {
+        padding: 40px 20px;
+    }
+    
+    .service-card {
+        padding: 30px 20px;
+    }
+    
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+    
+    .cta-wrapper {
+        padding: 40px 20px;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .mission-quote {
+        font-size: 1.2rem;
+    }
+    
+    .testimonial-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading animations */
+[data-aos] {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Selection styling */
+::selection {
+    background: var(--secondary-color);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--secondary-color);
+    color: white;
+}
+</style>
+
+<!-- AOS (Animate On Scroll) Library -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- Initialize AOS and Counter Animation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
+    });
+    
+    // Counter animation
+    function animateCounters() {
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        });
+    }
+    
+    // Trigger counter animation when stats section is in view
+    const statsSection = document.querySelector('.stats-section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        const heroSection = document.querySelector('.hero-bg');
+        if (heroSection) {
+            heroSection.style.transform = `translateY(${rate}px)`;
+        }
+    });
+});
+</script>
+
+{% endblock %}

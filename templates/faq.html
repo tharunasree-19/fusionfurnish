@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ - FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Frequently Asked Questions</h1>
+    
+    <div class="max-w-3xl mx-auto">
+        {% for faq in faqs %}
+        <div class="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-amber-50 border-l-4 border-amber-500">
+                <h3 class="text-xl font-semibold text-gray-800">{{ faq.question }}</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-gray-600">{{ faq.answer }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!-- Additional FAQs -->
+        <div class="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-amber-50 border-l-4 border-amber-500">
+                <h3 class="text-xl font-semibold text-gray-800">What is your delivery policy?</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-gray-600">We offer free delivery within city limits for orders above ₹15,000. For other areas, delivery charges start at ₹999 depending on the distance and size of the furniture.</p>
+            </div>
+        </div>
+        
+        <div class="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-amber-50 border-l-4 border-amber-500">
+                <h3 class="text-xl font-semibold text-gray-800">Do you offer warranty on your furniture?</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-gray-600">Yes, all our furniture comes with a 1-year warranty against manufacturing defects. Premium items have extended warranties of up to 3 years.</p>
+            </div>
+        </div>
+        
+        <div class="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-amber-50 border-l-4 border-amber-500">
+                <h3 class="text-xl font-semibold text-gray-800">Can I return or exchange furniture?</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-gray-600">We accept returns within 7 days of delivery if the item is in its original condition. Custom-made furniture is non-returnable. Exchange is possible subject to availability.</p>
+            </div>
+        </div>
+        
+        <div class="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-amber-50 border-l-4 border-amber-500">
+                <h3 class="text-xl font-semibold text-gray-800">How do I care for my furniture?</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-gray-600">Different materials require different care. We provide care instructions with each purchase. Generally, avoid direct sunlight, use coasters for hot items, and dust regularly with a soft cloth.</p>
+            </div>
+        </div>
+        
+        <div class="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-amber-50 border-l-4 border-amber-500">
+                <h3 class="text-xl font-semibold text-gray-800">Do you offer EMI options?</h3>
+            </div>
+            <div class="px-6 py-4">
+                <p class="text-gray-600">Yes, we offer No-Cost EMI options on selected bank credit cards for purchases above ₹10,000. EMI tenure ranges from 3 to 12 months.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-10 text-center">
+        <h2 class="text-2xl font-bold mb-4">Still have questions?</h2>
+        <p class="text-gray-600 mb-6">Our customer service team is here to help</p>
+        <a href="{{ url_for('contact') }}" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+            Contact Us
+        </a>
+    </div>
+</div>
+{% endblock %}

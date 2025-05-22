@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}My Orders | FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">My Orders</h1>
+            
+            {% if orders %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.order_id[:8] }}...</td>
+                                    <td>{{ order.created_at.split('T')[0] }}</td>
+                                    <td>₹{{ order.total_amount }}</td>
+                                    <td>
+                                        <span class="badge {% if order.status == 'Delivered' %}bg-success{% elif order.status == 'Cancelled' %}bg-danger{% elif order.status == 'Shipped' %}bg-info{% else %}bg-warning{% endif %}">
+                                            {{ order.status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('order_detail', order_id=order.order_id) }}" class="btn btn-sm btn-outline-primary">View Details</a>
+                                        {% if order.status not in ['Delivered', 'Shipped', 'Cancelled'] %}
+                                            <form method="post" action="{{ url_for('cancel_order', order_id=order.order_id) }}" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel Order</button>
+                                            </form>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>You haven't placed any orders yet. Browse our <a href="{{ url_for('furniture_catalog') }}">catalog</a> to place an order.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

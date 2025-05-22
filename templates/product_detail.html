@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - FusionFurnish{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-6 px-4">
+    <nav class="text-sm mb-6">
+        <ol class="flex flex-wrap items-center">
+            <li>
+                <a href="{{ url_for('furniture_catalog') }}" class="text-gray-500 hover:text-indigo-600">Catalog</a>
+            </li>
+            <li class="mx-2 text-gray-400">/</li>
+            <li>
+                <a href="{{ url_for('furniture_catalog', category=product.category) }}" class="text-gray-500 hover:text-indigo-600">{{ product.category }}</a>
+            </li>
+            <li class="mx-2 text-gray-400">/</li>
+            <li class="text-gray-700 font-medium">{{ product.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Product Image -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <img src="/static/images/{{ product.image }}" alt="{{ product.name }}" class="w-full h-80 object-contain">
+            <div class="mt-4 grid grid-cols-4 gap-2">
+                <img src="/static/images/{{ product.image }}" alt="{{ product.name }}" class="w-full h-16 object-cover rounded cursor-pointer border-2 border-indigo-500">
+                <img src="/static/images/placeholder-1.jpg" alt="Alternative view" class="w-full h-16 object-cover rounded cursor-pointer hover:border-2 hover:border-indigo-500">
+                <img src="/static/images/placeholder-2.jpg" alt="Alternative view" class="w-full h-16 object-cover rounded cursor-pointer hover:border-2 hover:border-indigo-500">
+                <img src="/static/images/placeholder-3.jpg" alt="Alternative view" class="w-full h-16 object-cover rounded cursor-pointer hover:border-2 hover:border-indigo-500">
+            </div>
+        </div>
+        
+        <!-- Product Details -->
+        <div>
+            <h1 class="text-3xl font-semibold text-gray-800">{{ product.name }}</h1>
+            <p class="text-lg text-gray-600 mb-4">{{ product.category }}</p>
+            
+            <div class="mb-4 flex items-center">
+                <div class="flex text-yellow-400">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="ml-2 text-gray-600">(4.5/5 based on 24 reviews)</span>
+            </div>
+            
+            <p class="text-2xl font-bold text-indigo-600 mb-4">₹{{ "{:,}".format(product.price) }}</p>
+            
+            <div class="mb-6">
+                <h2 class="text-lg font-medium text-gray-800 mb-2">Description</h2>
+                <p class="text-gray-700">{{ product.description }}</p>
+            </div>
+            
+            <div class="mb-6">
+                <h2 class="text-lg font-medium text-gray-800 mb-2">Key Features</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Premium quality materials</li>
+                    <li>Ergonomic design for maximum comfort</li>
+                    <li>Durable construction</li>
+                    <li>Easy to clean and maintain</li>
+                </ul>
+            </div>
+            
+            <div class="mb-6">
+                <h2 class="text-lg font-medium text-gray-800 mb-2">Dimensions</h2>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="p-2 bg-gray-50 rounded">
+                        <p class="text-sm text-gray-600">Width</p>
+                        <p class="font-medium">80 cm</p>
+                    </div>
+                    <div class="p-2 bg-gray-50 rounded">
+                        <p class="text-sm text-gray-600">Depth</p>
+                        <p class="font-medium">60 cm</p>
+                    </div>
+                    <div class="p-2 bg-gray-50 rounded">
+                        <p class="text-sm text-gray-600">Height</p>
+                        <p class="font-medium">75 cm</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-3">
+                <form method="POST" action="{{ url_for('quick_order', product_id=product.id) }}">
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                        Buy Now
+                    </button>
+                </form>
+                
+                <form method="POST" action="{{ url_for('add_to_wishlist', product_id=product.id) }}" id="wishlistForm">
+                    <button type="submit" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center">
+                        <i class="fas fa-heart mr-2"></i> Add to Wishlist
+                    </button>
+                </form>
+                
+                <a href="{{ url_for('custom_request') }}" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors flex items-center">
+                    <i class="fas fa-pencil-alt mr-2"></i> Customize
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Related Products -->
+    <div class="mt-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">You May Also Like</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Show 4 random products in the same category -->
+            {% for i in range(1, 5) %}
+            {% set related_product = {'id': i, 'name': 'Related Product ' ~ i, 'category': product.category, 'price': product.price - 1000 + (i * 1000), 'image': 'placeholder-' ~ i ~ '.jpg'} %}
+            <div class="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                <a href="{{ url_for('product_detail', product_id=related_product.id) }}">
+                    <img src="/static/images/{{ related_product.image }}" alt="{{ related_product.name }}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">{{ related_product.name }}</h3>
+                        <p class="text-gray-600 text-sm">{{ related_product.category }}</p>
+                        <div class="mt-2 flex items-center justify-between">
+                            <p class="text-indigo-600 font-bold">₹{{ "{:,}".format(related_product.price) }}</p>
+                            <a href="{{ url_for('product_detail', product_id=related_product.id) }}" class="text-indigo-600 hover:text-indigo-800">
+                                View
+                            </a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Add to wishlist via AJAX
+    document.getElementById('wishlistForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        fetch(this.action, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const wishlistBtn = this.querySelector('button');
+                wishlistBtn.innerHTML = '<i class="fas fa-heart mr-2 text-red-500"></i> Added to Wishlist';
+                wishlistBtn.classList.add('bg-gray-50');
+            }
+        });
+    });
+    
+    // Image gallery functionality
+    const thumbnails = document.querySelectorAll('.grid-cols-4 img');
+    const mainImage = document.querySelector('.h-80');
+    
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            // Update main image
+            mainImage.src = this.src;
+            
+            // Remove border from all thumbnails
+            thumbnails.forEach(t => t.classList.remove('border-2', 'border-indigo-500'));
+            
+            // Add border to clicked thumbnail
+            this.classList.add('border-2', 'border-indigo-500');
+        });
+    });
+</script>
+{% endblock %}
