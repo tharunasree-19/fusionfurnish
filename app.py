@@ -19,9 +19,8 @@ SENDER_EMAIL = os.getenv("SENDER_EMAIL")  # Set in your environment
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")  # App password
 SNS_TOPIC_ARN = os.getenv("SNS_TOPIC_ARN")  # Set this in your environment
 
-# AWS setup using default or environment-provided credentials
-dynamodb = boto3.resource('dynamodb', region_name=AWS_REGION)
-sns = boto3.client('sns', region_name=AWS_REGION)
+dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+sns = boto3.client('sns', region_name='ap-south-1')
 
 # DynamoDB Tables
 users_table = dynamodb.Table('FusionFurnishUsers')
@@ -32,6 +31,9 @@ wishlist_table = dynamodb.Table('FusionFurnishWishlists')
 consultation_table = dynamodb.Table('FusionFurnishConsultations')
 products_table = dynamodb.Table('FusionFurnishProducts')
 admin_users_table = dynamodb.Table('FusionFurnishAdminUsers')
+
+# SNS Topic ARN - MAKE SURE THIS LINE EXISTS AND IS CORRECT
+sns_topic_arn = 'arn:aws:sns:ap-south-1:601457281445:FFNotifications'
 
 # Email Configuration
 SMTP_SERVER = "smtp.gmail.com"
@@ -121,11 +123,14 @@ def register():
             'preferences': {}
         })
 
-        sns.publish(
-            TopicArn=sns_topic_arn,
-            Message=f'New FusionFurnish user: {name} ({email})',
-            Subject='New User Registration'
-        )
+        try:
+            sns.publish(
+                TopicArn=sns_topic_arn,
+                Message=f'New FusionFurnish user: {name} ({email})',
+                Subject='New User Registration'
+            )
+        except Exception as e:
+            print(f"Failed to send SNS notification: {e}")
 
         send_email(email, "Welcome to FusionFurnish", 
                   f"Hello {name},\n\nWelcome to FusionFurnish! Your account has been created successfully.\n\nRegards,\nFusionFurnish Team")
