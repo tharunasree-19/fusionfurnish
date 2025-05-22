@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block title %}Dashboard - FusionFurnish{% endblock %}
+
 {% block extra_css %}
 <style>
     .dashboard-card {
@@ -11,6 +13,7 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <!-- Dashboard Header -->
@@ -27,7 +30,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Dashboard Stats -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Orders Stat -->
@@ -42,7 +45,9 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ url_for('user_orders') }}" class="text-sm text-white hover:text-blue-100">View all orders <i class="fas fa-arrow-right ml-1"></i></a>
+                <a href="{{ url_for('user_orders') }}" class="text-sm text-white hover:text-blue-100">
+                    View all orders <i class="fas fa-arrow-right ml-1"></i>
+                </a>
             </div>
         </div>
 
@@ -58,260 +63,47 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ url_for('custom_request') }}" class="text-sm text-white hover:text-green-100">New request <i class="fas fa-plus ml-1"></i></a>
-            </div>
-        </div>
-
-        <!-- Consultations Stat -->
-        <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg shadow-sm p-6 dashboard-card">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-lg font-semibold">Consultations</p>
-                    <h2 class="text-3xl font-bold mt-2">{{ consultations|length }}</h2>
-                </div>
-                <div class="rounded-full bg-white bg-opacity-20 p-3">
-                    <i class="fas fa-calendar-alt text-xl"></i>
-                </div>
-            </div>
-            <div class="mt-4">
-                <a href="{{ url_for('design_consultation') }}" class="text-sm text-white hover:text-purple-100">Book consultation <i class="fas fa-calendar-plus ml-1"></i></a>
+                <a href="{{ url_for('user_design_requests') }}" class="text-sm text-white hover:text-green-100">
+                    View requests <i class="fas fa-arrow-right ml-1"></i>
+                </a>
             </div>
         </div>
 
         <!-- Wishlist Stat -->
-        <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg shadow-sm p-6 dashboard-card">
+        <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg shadow-sm p-6 dashboard-card">
             <div class="flex justify-between items-center">
                 <div>
-                    <p class="text-lg font-semibold">Wishlist Items</p>
-                    <h2 class="text-3xl font-bold mt-2">0</h2>
+                    <p class="text-lg font-semibold">Wishlist</p>
+                    <h2 class="text-3xl font-bold mt-2">{{ wishlist|length }}</h2>
                 </div>
                 <div class="rounded-full bg-white bg-opacity-20 p-3">
                     <i class="fas fa-heart text-xl"></i>
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ url_for('wishlist') }}" class="text-sm text-white hover:text-orange-100">View wishlist <i class="fas fa-arrow-right ml-1"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Recent Orders Section -->
-    <div class="bg-white shadow-sm rounded-lg p-6 mb-8">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-gray-800">Recent Orders</h2>
-            <a href="{{ url_for('user_orders') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">View All</a>
-        </div>
-        
-        {% if orders %}
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Items</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        {% for order in orders[:5] %}
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                #{{ order.order_id[:8] }}...
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ order.created_at[:10] }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ order.items|length }} items
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                                ₹{{ "%.2f"|format(order.total_amount) }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
-                                    {% if order.status == 'Delivered' %}bg-green-100 text-green-800
-                                    {% elif order.status == 'Shipped' %}bg-blue-100 text-blue-800
-                                    {% elif order.status == 'Processing' %}bg-yellow-100 text-yellow-800
-                                    {% elif order.status == 'Cancelled' %}bg-red-100 text-red-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">
-                                    {{ order.status }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ url_for('order_detail', order_id=order.order_id) }}" class="text-blue-600 hover:text-blue-900">View Details</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <div class="text-center py-12">
-                <i class="fas fa-shopping-bag text-gray-400 text-6xl mb-4"></i>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">No orders yet</h3>
-                <p class="text-gray-500 mb-6">Start browsing our furniture collection to place your first order.</p>
-                <a href="{{ url_for('furniture_catalog') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                    <i class="fas fa-search mr-2"></i> Browse Furniture
+                <a href="{{ url_for('wishlist') }}" class="text-sm text-white hover:text-purple-100">
+                    View wishlist <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             </div>
-        {% endif %}
-    </div>
-
-    <!-- Design Requests Section -->
-    <div class="bg-white shadow-sm rounded-lg p-6 mb-8">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-gray-800">Design Requests</h2>
-            <a href="{{ url_for('custom_request') }}" class="text-green-600 hover:text-green-800 text-sm font-medium">New Request</a>
         </div>
-        
-        {% if design_requests %}
-            <div class="space-y-4">
-                {% for request in design_requests[:3] %}
-                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1">
-                            <div class="flex items-center mb-2">
-                                <h3 class="text-lg font-semibold text-gray-800">{{ request.furniture_type }}</h3>
-                                <span class="ml-3 inline-flex px-2 py-1 text-xs font-semibold rounded-full
-                                    {% if request.status == 'Completed' %}bg-green-100 text-green-800
-                                    {% elif request.status == 'In Progress' %}bg-blue-100 text-blue-800
-                                    {% elif request.status == 'Pending' %}bg-yellow-100 text-yellow-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">
-                                    {{ request.status }}
-                                </span>
-                            </div>
-                            <p class="text-gray-600 text-sm mb-2">{{ request.description[:150] }}{% if request.description|length > 150 %}...{% endif %}</p>
-                            <div class="flex items-center text-xs text-gray-500">
-                                <i class="fas fa-calendar mr-1"></i>
-                                <span>Requested on {{ request.created_at[:10] }}</span>
-                                <span class="mx-2">•</span>
-                                <span>ID: {{ request.request_id[:8] }}...</span>
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- Consultations Stat -->
+        <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg shadow-sm p-6 dashboard-card">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-lg font-semibold">Consultations</p>
+                    <h2 class="text-3xl font-bold mt-2">{{ consultations|length }}</h2>
                 </div>
-                {% endfor %}
+                <div class="rounded-full bg-white bg-opacity-20 p-3">
+                    <i class="fas fa-comments text-xl"></i>
+                </div>
             </div>
-        {% else %}
-            <div class="text-center py-12">
-                <i class="fas fa-paint-brush text-gray-400 text-6xl mb-4"></i>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">No design requests yet</h3>
-                <p class="text-gray-500 mb-6">Request custom furniture designed specifically for your needs.</p>
-                <a href="{{ url_for('custom_request') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-                    <i class="fas fa-plus mr-2"></i> Request Custom Design
+            <div class="mt-4">
+                <a href="{{ url_for('user_consultations') }}" class="text-sm text-white hover:text-yellow-100">
+                    View consultations <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             </div>
-        {% endif %}
-    </div>
-
-    <!-- Consultations Section -->
-    <div class="bg-white shadow-sm rounded-lg p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-gray-800">Consultations</h2>
-            <a href="{{ url_for('design_consultation') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Book Consultation</a>
-        </div>
-        
-        {% if consultations %}
-            <div class="space-y-4">
-                {% for consultation in consultations[:3] %}
-                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1">
-                            <div class="flex items-center mb-2">
-                                <h3 class="text-lg font-semibold text-gray-800">{{ consultation.consultation_type }} - {{ consultation.room_type }}</h3>
-                                <span class="ml-3 inline-flex px-2 py-1 text-xs font-semibold rounded-full
-                                    {% if consultation.status == 'Completed' %}bg-green-100 text-green-800
-                                    {% elif consultation.status == 'Confirmed' %}bg-blue-100 text-blue-800
-                                    {% elif consultation.status == 'Requested' %}bg-yellow-100 text-yellow-800
-                                    {% elif consultation.status == 'Cancelled' %}bg-red-100 text-red-800
-                                    {% else %}bg-gray-100 text-gray-800{% endif %}">
-                                    {{ consultation.status }}
-                                </span>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600 mb-2">
-                                <i class="fas fa-calendar mr-2"></i>
-                                <span>{{ consultation.preferred_date }} at {{ consultation.preferred_time }}</span>
-                            </div>
-                            {% if consultation.special_requirements %}
-                            <p class="text-gray-600 text-sm mb-2">{{ consultation.special_requirements[:100] }}{% if consultation.special_requirements|length > 100 %}...{% endif %}</p>
-                            {% endif %}
-                            <div class="flex items-center text-xs text-gray-500">
-                                <span>Requested on {{ consultation.created_at[:10] }}</span>
-                                <span class="mx-2">•</span>
-                                <span>ID: {{ consultation.consultation_id[:8] }}...</span>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <a href="{{ url_for('consultation_detail', consultation_id=consultation.consultation_id) }}" class="text-purple-600 hover:text-purple-900 text-sm font-medium">
-                                View Details
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="text-center py-12">
-                <i class="fas fa-calendar-alt text-gray-400 text-6xl mb-4"></i>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">No consultations scheduled</h3>
-                <p class="text-gray-500 mb-6">Book a consultation with our interior design experts.</p>
-                <a href="{{ url_for('design_consultation') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700">
-                    <i class="fas fa-calendar-plus mr-2"></i> Book Consultation
-                </a>
-            </div>
-        {% endif %}
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="mt-8 bg-gray-50 rounded-lg p-6">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="{{ url_for('furniture_catalog') }}" class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="rounded-full bg-blue-100 p-3 mr-4">
-                    <i class="fas fa-search text-blue-600"></i>
-                </div>
-                <div>
-                    <h3 class="font-medium text-gray-800">Browse Catalog</h3>
-                    <p class="text-sm text-gray-500">Explore furniture</p>
-                </div>
-            </a>
-            
-            <a href="{{ url_for('custom_request') }}" class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="rounded-full bg-green-100 p-3 mr-4">
-                    <i class="fas fa-palette text-green-600"></i>
-                </div>
-                <div>
-                    <h3 class="font-medium text-gray-800">Custom Design</h3>
-                    <p class="text-sm text-gray-500">Request custom furniture</p>
-                </div>
-            </a>
-            
-            <a href="{{ url_for('design_consultation') }}" class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="rounded-full bg-purple-100 p-3 mr-4">
-                    <i class="fas fa-user-tie text-purple-600"></i>
-                </div>
-                <div>
-                    <h3 class="font-medium text-gray-800">Consultation</h3>
-                    <p class="text-sm text-gray-500">Book expert advice</p>
-                </div>
-            </a>
-            
-            <a href="{{ url_for('contact') }}" class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div class="rounded-full bg-orange-100 p-3 mr-4">
-                    <i class="fas fa-headset text-orange-600"></i>
-                </div>
-                <div>
-                    <h3 class="font-medium text-gray-800">Support</h3>
-                    <p class="text-sm text-gray-500">Get help</p>
-                </div>
-            </a>
         </div>
     </div>
 </div>
-
-<!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock %}
