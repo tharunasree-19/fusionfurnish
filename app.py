@@ -6,18 +6,22 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from bcrypt import hashpw, gensalt, checkpw
 import os
-from datetime import datetime, timedelta
-import uuid
-import json
+from datetime import datetime
 from decimal import Decimal
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Secret key for session management
+app.secret_key = os.urandom(24)
 
-# AWS setup
-dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
-sns = boto3.client('sns', region_name='ap-south-1')
+# Load sensitive info from environment variables
+AWS_REGION = os.getenv('AWS_REGION', 'ap-south-1')
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")  # Set in your environment
+SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")  # App password
+SNS_TOPIC_ARN = os.getenv("SNS_TOPIC_ARN")  # Set this in your environment
+
+# AWS setup using default or environment-provided credentials
+dynamodb = boto3.resource('dynamodb', region_name=AWS_REGION)
+sns = boto3.client('sns', region_name=AWS_REGION)
 
 # DynamoDB Tables
 users_table = dynamodb.Table('FusionFurnishUsers')
@@ -29,14 +33,9 @@ consultation_table = dynamodb.Table('FusionFurnishConsultations')
 products_table = dynamodb.Table('FusionFurnishProducts')
 admin_users_table = dynamodb.Table('FusionFurnishAdminUsers')
 
-# SNS Topic ARN
-sns_topic_arn = 'arn:aws:sns:ap-south-1:601457281445:FFNotifications'
-
-# Email configuration
+# Email Configuration
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "gtharunasri19@gmail.com"
-SENDER_PASSWORD = "umpb bimb pahp axmc"  # App password
 
 def send_email(to_email, subject, body):
     msg = MIMEMultipart()
@@ -55,19 +54,16 @@ def send_email(to_email, subject, body):
     except Exception as e:
         print(f"Failed to send email: {e}")
 
-# Check if user is logged in
+# Utility functions
 def is_logged_in():
     return 'user_email' in session
 
-# Admin login check
 def is_admin():
     if 'admin_email' not in session:
         return False
-    
     response = admin_users_table.get_item(Key={'email': session['admin_email']})
     return 'Item' in response
 
-# Admin required decorator
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -76,7 +72,6 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Login required decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -85,11 +80,11 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# Convert DynamoDB Decimal to float for JSON serialization
 def decimal_default(obj):
     if isinstance(obj, Decimal):
         return float(obj)
     raise TypeError
+
 
 @app.route('/')
 def home():
